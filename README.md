@@ -67,11 +67,6 @@ hostsUtil.stringify({
 // 192.168.0.1	www.example.org
 ```
 
-equals to
-
-```js
-```
-
 ## License
 
 MIT
