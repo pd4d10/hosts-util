@@ -1,7 +1,3 @@
-function isUndefined(val) {
-  return typeof val === 'undefined'
-}
-
 function isString(val) {
   return typeof val === 'string'
 }
@@ -10,30 +6,27 @@ function isObject(val) {
   return val !== null && typeof val === 'object'
 }
 
-function parse(hosts, opt) {
+function parse(hosts) {
   if (!isString(hosts)) {
     throw new Error('Parse\'s first param should be a string')
   }
-
-  if (!isObject(opt)) {
-    opt = {}
-  }
-
   return hosts.split('\n')
-    .filter(function (str) { // remove blank line
-      return /\s*/.test(str)
+    .filter(function (str) {
+      return /\s*/.test(str) // remove blank line
     })
     .map(function (line) {
-      return line.trim().split(/\s+/)
+      return line.trim()
+        .split('#')[0].trim() // remove comment
+        .split(/\s+/)
     })
     .reduce(function (obj, line) {
       var ip = line[0]
       var names = line.slice(1)
-      var nameObj = names.reduce(function (ob, name) {
-        return Object.assign(ob, { [name]: ip })
+      names.forEach(function (name) {
+        obj[name] = ip
       }, {})
 
-      return Object.assign(obj, nameObj)
+      return obj
     }, {})
 }
 
@@ -46,13 +39,13 @@ function stringify(json, opt) {
     opt = {}
   }
 
-  if (isUndefined(opt.seperate)) {
-    opt.seperate = ' '
+  if (!isString(opt.separator)) {
+    opt.separator = ' '
   }
 
   return Object.keys(json)
     .map(function (key) {
-      return json[key] + opt.seperate + key
+      return json[key] + opt.separator + key
     })
     .join('\n')
 }

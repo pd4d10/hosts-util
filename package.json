@@ -4,8 +4,12 @@
   "description": "Parse and stringify hosts file.",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint *.js",
     "test": "istanbul cover _mocha"
   },
+  "file": [
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pd4d10/hosts-util.git"
@@ -22,7 +26,15 @@
   },
   "homepage": "https://github.com/pd4d10/hosts-util#readme",
   "devDependencies": {
+    "eslint": "^3.9.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "mocha": true,
+      "node": true
+    }
   }
 }

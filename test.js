@@ -61,6 +61,19 @@ describe('parse', function () {
       }
     )
   })
+
+  it('should handle comment at start of a line', function () {
+    assert.deepEqual(parse('# 127.0.0.1 www.example.com'), {})
+  })
+
+  it('should handle comment at middle of a line', function () {
+    assert.deepEqual(
+      parse('127.0.0.1 www.example.com # www.example.org'),
+      {
+        'www.example.com': '127.0.0.1',
+      }
+    )
+  })
 })
 
 describe('stringify', function () {
@@ -73,7 +86,7 @@ describe('stringify', function () {
     )
   })
 
-  it('should', function () {
+  it('should handle single hosts', function () {
     assert.equal(
       stringify({
         'www.example.com': '127.0.0.1'
@@ -82,13 +95,24 @@ describe('stringify', function () {
     )
   })
 
-  it('should', function () {
+  it('should handle multi hosts', function () {
     assert.equal(
       stringify({
         'www.example.com': '127.0.0.1',
         'www.example.org': '192.168.0.1',
       }),
       '127.0.0.1 www.example.com\n192.168.0.1 www.example.org'
+    )
+  })
+
+  it('should separator param work', function () {
+    assert.equal(
+      stringify({
+        'www.example.com': '127.0.0.1',
+      }, {
+        separator: '\t'
+      }),
+      '127.0.0.1\twww.example.com'
     )
   })
 })
