@@ -1,5 +1,10 @@
 # hosts-util
 
+[![Build Status](https://travis-ci.org/pd4d10/hosts-util.svg?branch=master)](https://travis-ci.org/pd4d10/hosts-util)
+[![codecov](https://codecov.io/gh/pd4d10/hosts-util/branch/master/graph/badge.svg)](https://codecov.io/gh/pd4d10/hosts-util)
+[![npm](https://img.shields.io/npm/v/hosts-util.svg)](https://www.npmjs.com/package/hosts-util)
+[![](https://img.shields.io/npm/l/hosts-util.svg)](https://www.npmjs.com/package/hosts-util)
+
 Parse and stringify hosts file.
 
 ## Installation
